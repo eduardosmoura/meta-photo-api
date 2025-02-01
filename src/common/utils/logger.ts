@@ -6,7 +6,9 @@ const { combine, timestamp, printf, errors, json } = format;
 
 // Define log folder path
 const logDir =
-  process.env.NODE_ENV === 'production' ? '/tmp/logs' : path.resolve(__dirname, '../../../logs');
+  process.env.NODE_ENV === 'production'
+    ? '/tmp/logs'
+    : path.resolve(__dirname, '../../../logs');
 
 // Ensure log directory exists; if not, create it
 if (!fs.existsSync(logDir)) {

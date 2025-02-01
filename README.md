@@ -190,7 +190,7 @@ A live deployment of the MetaPhoto API at `Vercel` is available at:
   - **[https://meta-photo-api-murex.vercel.app/](https://meta-photo-api-murex.vercel.app/)**
 
 - **Logging:**
-  Logs are generated using Winston and are stored in the `/log` folder. The logger configuration is located in `src/common/utils/logger.ts`.
+  Logs are generated using Winston and are stored in the `/logs` folder. The logger configuration is located in `src/common/utils/logger.ts`.
 
 - **GitHub Actions:**
   The repository includes a GitHub Actions workflow to deploy the API to Vercel on each commit to the `main` branch.
