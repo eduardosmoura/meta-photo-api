@@ -184,18 +184,21 @@ A live deployment of the MetaPhoto API at `Vercel` is available at:
 
 ## Additional Notes
 
+- **Cache Map Strategy:**
+  The service layer implements a `cache map` strategy to store `albums` and `users` after the first API call. This strategy prevents repeated calls to the external API for the same album or user, significantly improving performance and reducing latency.
+
+- **Logging:**
+  Logs are generated using Winston and are stored in the `/logs` folder. The logger configuration is located in `src/common/utils/logger.ts`.
+
+- **Postman Collection:**
+  A Postman collection is provided in the repository for testing all endpoints, including filtering and pagination scenarios.
+
 - **Swagger Documentation:**
   The API includes Swagger documentation available at the root URL (e.g., `http://localhost:3000` in development):
 
   - **[https://meta-photo-api-murex.vercel.app/](https://meta-photo-api-murex.vercel.app/)**
 
-- **Logging:**
-  Logs are generated using Winston and are stored in the `/logs` folder. The logger configuration is located in `src/common/utils/logger.ts`.
-
 - **GitHub Actions:**
   The repository includes a GitHub Actions workflow to deploy the API to Vercel on each commit to the `main` branch.
-
-- **Postman Collection:**
-  A Postman collection is provided in the repository for testing all endpoints, including filtering and pagination scenarios.
 
 Feel free to contribute or open issues if you encounter any problems. Enjoy using MetaPhoto API!
