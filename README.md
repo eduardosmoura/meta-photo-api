@@ -195,4 +195,7 @@ A live deployment of the MetaPhoto API at `Vercel` is available at:
 - **GitHub Actions:**
   The repository includes a GitHub Actions workflow to deploy the API to Vercel on each commit to the `main` branch.
 
+- **Postman Collection:**
+  A Postman collection is provided in the repository for testing all endpoints, including filtering and pagination scenarios.
+
 Feel free to contribute or open issues if you encounter any problems. Enjoy using MetaPhoto API!
