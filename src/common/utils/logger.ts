@@ -4,12 +4,13 @@ import * as path from 'path';
 
 const { combine, timestamp, printf, errors, json } = format;
 
-// Define the log folder path
-const logDir = path.resolve(__dirname, '../../../logs');
+// Define log folder path
+const logDir =
+  process.env.NODE_ENV === 'production' ? '/tmp/logs' : path.resolve(__dirname, '../../../logs');
 
 // Ensure log directory exists; if not, create it
 if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir);
+  fs.mkdirSync(logDir, { recursive: true });
 }
 
 // Custom format for console logging
