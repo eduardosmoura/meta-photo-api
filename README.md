@@ -4,7 +4,7 @@ MetaPhoto API
 
 ## Overview
 
-MetaPhoto API is a lightweight NestJS-based API designed to help photographers organize their photo libraries. The API enriches photo data by combining information from multiple endpoints and offers robust filtering and pagination options. It follows Clean Architecture principles and is built with TypeScript, SOLID, and Clean Code practices.
+MetaPhoto API is a lightweight NestJS-based API designed to help photographers organize their photo libraries. The API enriches photo data by combining information from multiple endpoints and offers robust filtering and pagination options. It follows Clean Architecture principles and is built with **TypeScript**, **SOLID**, **Clean Code**, and **Clean Architecture** practices.
 
 ## Table of Contents
 
