@@ -7,6 +7,9 @@ import { HttpExceptionFilter } from './common/errors/http-exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create(MetaPhotoApiModule);
 
+  // Enable CORS with default settings (allows all origins)
+  app.enableCors();
+
   // Global validation (sanitization)
   app.useGlobalPipes(
     new ValidationPipe({
