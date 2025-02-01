@@ -179,7 +179,7 @@ yarn test:e2e
 
 ## Live Deployment
 
-A live deployment of the MetaPhoto API at `Vercel` is available at:
+A live deployment of the MetaPhoto API, hosted on `Vercel`, is available at:
 **[https://meta-photo-api-murex.vercel.app/](https://meta-photo-api-murex.vercel.app/)**
 
 ## Additional Notes
