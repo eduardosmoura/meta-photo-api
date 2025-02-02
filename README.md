@@ -201,4 +201,7 @@ A live deployment of the MetaPhoto API, hosted on `Vercel`, is available at:
 - **GitHub Actions:**
   The repository includes a GitHub Actions workflow to deploy the API to Vercel on each commit to the `main` branch.
 
+- **Vercel Deployment:**
+  Due to a known Vercel **deployment issue** (`this serverless function has crashed`), the vercel.json file was modified to include a reference to the `dist` build. Additionally, the `.gitignore` file was updated to uncomment the /dist folder for the same reason.
+
 Feel free to contribute or open issues if you encounter any problems. Enjoy using MetaPhoto API!
