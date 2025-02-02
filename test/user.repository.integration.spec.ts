@@ -5,10 +5,11 @@ import { UserRepository } from '../src/infrastructure/repositories/user.reposito
 import { CustomHttpService } from '../src/infrastructure/services/http.service';
 import { User } from '../src/core/domain/user.entity';
 
-jest.setTimeout(30000); // Increase timeout if needed
+jest.setTimeout(30000);
 
 describe('UserRepository Integration', () => {
   let userRepository: UserRepository;
+  let fetchedUser: User;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -29,16 +30,41 @@ describe('UserRepository Integration', () => {
     userRepository = module.get<UserRepository>(UserRepository);
   });
 
-  it('should return a valid user for id=1', async () => {
-    const user: User = await userRepository.getById(1);
-    expect(user).toBeDefined();
-    expect(user.id).toBe(1);
-    expect(user.name).toBeDefined();
-    expect(user.username).toBeDefined();
-    expect(user.email).toBeDefined();
-    // Additional properties can be verified as needed
-    expect(user.address).toBeDefined();
-    expect(user.address.street).toBeDefined();
-    expect(user.company).toBeDefined();
+  describe('When fetching a user by id = 1', () => {
+    beforeAll(async () => {
+      fetchedUser = await userRepository.getById(1);
+    });
+
+    it('should return a user that is defined', () => {
+      expect(fetchedUser).toBeDefined();
+    });
+
+    it('should return a user with id equal to 1', () => {
+      expect(fetchedUser.id).toBe(1);
+    });
+
+    it('should return a user with a defined name', () => {
+      expect(fetchedUser.name).toBeDefined();
+    });
+
+    it('should return a user with a defined username', () => {
+      expect(fetchedUser.username).toBeDefined();
+    });
+
+    it('should return a user with a defined email', () => {
+      expect(fetchedUser.email).toBeDefined();
+    });
+
+    it('should return a user with an address defined', () => {
+      expect(fetchedUser.address).toBeDefined();
+    });
+
+    it('should return a user with a street in the address defined', () => {
+      expect(fetchedUser.address.street).toBeDefined();
+    });
+
+    it('should return a user with a company defined', () => {
+      expect(fetchedUser.company).toBeDefined();
+    });
   });
 });

@@ -9,6 +9,8 @@ jest.setTimeout(30000);
 
 describe('PhotoRepository Integration', () => {
   let photoRepository: PhotoRepository;
+  let fetchedPhoto: Photo;
+  let allPhotos: Photo[];
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -29,25 +31,75 @@ describe('PhotoRepository Integration', () => {
     photoRepository = module.get<PhotoRepository>(PhotoRepository);
   });
 
-  it('should return a valid photo for id=1', async () => {
-    const photo: Photo = await photoRepository.getById(1);
-    expect(photo).toBeDefined();
-    expect(photo.id).toBe(1);
-    expect(photo.title).toBeDefined();
-    expect(photo.url).toBeDefined();
-    expect(photo.thumbnailUrl).toBeDefined();
-    expect(photo.albumId).toBeDefined();
+  describe('When calling getById with id = 1', () => {
+    beforeAll(async () => {
+      fetchedPhoto = await photoRepository.getById(1);
+    });
+
+    it('should return a defined photo', () => {
+      expect(fetchedPhoto).toBeDefined();
+    });
+
+    it('should return a photo with id equal to 1', () => {
+      expect(fetchedPhoto.id).toBe(1);
+    });
+
+    it('should return a photo that has a defined title', () => {
+      expect(fetchedPhoto.title).toBeDefined();
+    });
+
+    it('should return a photo that has a defined url', () => {
+      expect(fetchedPhoto.url).toBeDefined();
+    });
+
+    it('should return a photo that has a defined thumbnailUrl', () => {
+      expect(fetchedPhoto.thumbnailUrl).toBeDefined();
+    });
+
+    it('should return a photo that has a defined albumId', () => {
+      expect(fetchedPhoto.albumId).toBeDefined();
+    });
   });
 
-  it('should return an array of photos using getAll()', async () => {
-    const photos: Photo[] = await photoRepository.getAll();
-    expect(Array.isArray(photos)).toBe(true);
-    expect(photos.length).toBeGreaterThan(0);
-    const firstPhoto = photos[0];
-    expect(firstPhoto).toHaveProperty('id');
-    expect(firstPhoto).toHaveProperty('title');
-    expect(firstPhoto).toHaveProperty('url');
-    expect(firstPhoto).toHaveProperty('thumbnailUrl');
-    expect(firstPhoto).toHaveProperty('albumId');
+  describe('When calling getAll', () => {
+    beforeAll(async () => {
+      allPhotos = await photoRepository.getAll();
+    });
+
+    it('should return an array of photos', () => {
+      expect(Array.isArray(allPhotos)).toBe(true);
+    });
+
+    it('should return an array that is not empty', () => {
+      expect(allPhotos.length).toBeGreaterThan(0);
+    });
+
+    describe('for the first photo in the returned array', () => {
+      let firstPhoto: Photo;
+
+      beforeAll(() => {
+        firstPhoto = allPhotos[0];
+      });
+
+      it('should have an id property', () => {
+        expect(firstPhoto).toHaveProperty('id');
+      });
+
+      it('should have a title property', () => {
+        expect(firstPhoto).toHaveProperty('title');
+      });
+
+      it('should have a url property', () => {
+        expect(firstPhoto).toHaveProperty('url');
+      });
+
+      it('should have a thumbnailUrl property', () => {
+        expect(firstPhoto).toHaveProperty('thumbnailUrl');
+      });
+
+      it('should have an albumId property', () => {
+        expect(firstPhoto).toHaveProperty('albumId');
+      });
+    });
   });
 });

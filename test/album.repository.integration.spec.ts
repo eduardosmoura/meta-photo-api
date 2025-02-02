@@ -9,6 +9,7 @@ jest.setTimeout(30000);
 
 describe('AlbumRepository Integration', () => {
   let albumRepository: AlbumRepository;
+  let album: Album;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -27,13 +28,22 @@ describe('AlbumRepository Integration', () => {
     }).compile();
 
     albumRepository = module.get<AlbumRepository>(AlbumRepository);
+    album = await albumRepository.getById(1);
   });
 
-  it('should return a valid album for id=1', async () => {
-    const album: Album = await albumRepository.getById(1);
+  it('should return a defined album when fetching album with id 1', () => {
     expect(album).toBeDefined();
+  });
+
+  it('should return an album whose id is 1', () => {
     expect(album.id).toBe(1);
+  });
+
+  it('should return an album with a defined title', () => {
     expect(album.title).toBeDefined();
+  });
+
+  it('should return an album with a defined userId', () => {
     expect(album.userId).toBeDefined();
   });
 });
