@@ -24,7 +24,75 @@ MetaPhoto API is a lightweight NestJS-based API designed to help photographers o
 
 ## Project Description
 
-MetaPhoto API aggregates data from internal endpoints provided by [jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com) and exposes a single external endpoint that returns enriched photo information. For each photo, it retrieves additional details about the album and the user who owns the album. Filtering is available on photo titles, album titles, and user emails, with pagination support to limit the amount of data returned.
+MetaPhoto API aggregates data from internal endpoints provided by [jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com) and exposes a single external endpoint that returns enriched photo information. For each photo, it retrieves additional details about the album and the user who owns the album, all in a single API call:
+* https://jsonplaceholder.typicode.com/users
+* https://jsonplaceholder.typicode.com/albums
+* https://jsonplaceholder.typicode.com/photos
+
+For example, the request for `/externalapi/photos/1`, the expectation is to return the following JSON, which includes all the information as shown below:
+
+```json
+{
+  "id": 1,
+  "title": "accusamus beatae ad facilis cum similique qui sunt",
+  "url": "https://via.placeholder.com/600/92c952",
+  "thumbnailUrl": "https://via.placeholder.com/150/92c952",
+  "album": {
+    "id": 1,
+    "title": "quidem molestiae enim",
+    "user": {
+      "id": 1,
+      "name": "Leanne Graham",
+      "username": "Bret",
+      "email": "Sincere@april.biz",
+      "address": {
+        "street": "Kulas Light",
+        "suite": "Apt. 556",
+        "city": "Gwenborough",
+        "zipcode": "92998-3874",
+        "geo": {
+          "lat": "-37.3159",
+          "lng": "81.1496"
+        }
+      },
+      "phone": "1-770-736-8031 x56442",
+      "website": "hildegard.org",
+      "company": {
+        "name": "Romaguera-Crona",
+        "catchPhrase": "Multi-layered client-server neural-net",
+        "bs": "harness real-time e-markets"
+      }
+    }
+  }
+}
+```
+Filtering is available on photo titles, album titles, and user emails, with pagination support to limit the amount of data returned.
+
+Three filtering options are available:
+* `title` should be `contains`
+* `album.title` should be `contains`
+* `album.user.email` should be an `equals`
+
+First example, if you receive a request for `/externalapi/photos?title=repudiandae%20iusto`, the
+expectation is to return the `4 photos` that contain `repudiandae iusto` in its `title`, which are the ones with
+IDs `13`, `260`, `318`, `577`.
+
+Second example, if you receive a request for `/externalapi/photos?album.title=quidem`, the
+expectation is to return the `100 photos` that belong to `albums 1` and `79`, because those are the only ones
+containing the word `quidem` in their `album.title`.
+
+Third example, if you receive a request for `/externalapi/photos?album.user.email=Sincere@april.biz`, the expectation is to return the `500 photos` that belong to
+`albums 1` to `10`, which are related to the user where `album.user.email` is` Sincere@april.biz`.
+
+Fourth example, more than one filter can be applied in a single request, so you can receive a request like
+`/externalapi/photos?album.title=quidem&title=repudiandae%20iusto` and you should only
+return photo ID `13` which is the only record that matches both filters.
+
+Additionally, a `pagination` capability is present to the external API to limit the amount of data returned by any single request.
+
+For example, if you receive a request `/externalapi/photos?album.title=quidem&limit=10&offset=50` you should only return 10 records starting from the item in position 50.
+
+In case the `limit` parameter is not received, the API defaults it to `25`, and in case the `offset` parameter is not received, the API defaults it to `0`.
 
 ## Code Structure
 
